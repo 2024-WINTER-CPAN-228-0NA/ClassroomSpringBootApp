@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Classroom SpringBoot App</title>
+    <style>
+        p {
+            color: blue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+<p th:text="${message}"></p>
+<ul th:each="number : ${numbers}">
+    <li th:text="${number}"></li>
+</ul>
+<form action="/save1" method="post">
+    <button type="submit" value="Call Post">Call Post End point 1</button>
+</form>
+</body>
+
+</html>
