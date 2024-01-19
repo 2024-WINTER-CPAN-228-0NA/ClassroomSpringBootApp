@@ -1,14 +1,16 @@
 package org.humber.ClassroomSpringBootApp.controllers;
 
+import org.humber.ClassroomSpringBootApp.services.Database;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Arrays;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -19,8 +21,13 @@ class HomeControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @MockBean
+    private Database database;
+
     @Test
     void test_Index_route() throws Exception {
+        when(database.getMessage()).thenReturn("Hello World");
+
         mockMvc.perform(get("/a"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("message", "numbers"))
