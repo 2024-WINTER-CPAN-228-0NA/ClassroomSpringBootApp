@@ -4,9 +4,7 @@ import org.humber.ClassroomSpringBootApp.services.Database;
 import org.humber.ClassroomSpringBootApp.services.serviceImpl.OracleDatabase;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 
@@ -21,6 +19,11 @@ public class HomeController {
 
     @GetMapping("/a")
     public String index(Model model) {
+        Student student = new Student();
+        student.setStudentId(1);
+        student.setStudentName("John");
+        System.out.println(student);
+        model.addAttribute("student", student);
         model.addAttribute("message", database.getMessage());
         model.addAttribute("numbers", Arrays.asList(1,2,3,4,5));
         return "index";
@@ -31,9 +34,9 @@ public class HomeController {
         return "response";
     }
 
-    @GetMapping("/")
+    @GetMapping("/{id}")
     @ResponseBody
-    public String home() {
+    public String home(@PathVariable String id) {
         return "hello world";
     }
 

@@ -15,6 +15,9 @@
 <ul th:each="number : ${numbers}">
     <li th:text="${number}"></li>
 </ul>
+<span th:text="${student.studentId}"></span>
+<br>
+<span th:text="${student.studentName}"></span>
 <form action="/save1" method="post">
     <button type="submit" value="Call Post">Call Post End point 1</button>
 </form>
